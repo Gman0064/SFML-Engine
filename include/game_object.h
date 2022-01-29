@@ -17,7 +17,7 @@ class GameObject : public Node
         sf::RectangleShape shape;
         
         GameObject();
-        void Update();
+        virtual void Update();
         void Instantiate();
 
         void Draw();
@@ -35,8 +35,8 @@ class GameObject : public Node
         void setSize(float x, float y);
         void setShape(sf::RectangleShape new_shape);
         void setShapeFillColor(sf::Color color);
-        void setPosition(sf::Vector2f position);
-        void setPosition(float x, float y);
+        virtual void setPosition(sf::Vector2f position);
+        virtual void setPosition(float x, float y);
 };
 
 #endif

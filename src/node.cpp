@@ -19,3 +19,8 @@ void Node::printNodeTree(Node* node, int level) {
         }
     }
 }
+
+
+void Node::Update() {
+    
+}

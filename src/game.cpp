@@ -24,26 +24,20 @@ Game::Game(std::string name, sf::Vector2f size) {
 
     Scene* root = new Scene();
 
-    GameObject* platform = new GameObject();
-    platform->appendToParent(root);
-    platform->setShapeFillColor(sf::Color::Red);
-    platform->setPosition(sf::Vector2f(0, 100));
-    platform->setSize(200, 20);
 
-    // Platform
-    GameObject* platform2 = new GameObject();
+    // Platform Two
+    PhysicsObject* platform2 = new PhysicsObject(false);
     platform2->appendToParent(root);
     platform2->setShapeFillColor(sf::Color::Red);
-    platform2->setPosition(sf::Vector2f(0, 200));
-    platform2->setSize(200, 20);
-
+    platform2->setPosition(sf::Vector2f(0, 600));
+    platform2->setSize(800, 20);
 
     // Dynamic Object
     PhysicsObject* player = new PhysicsObject(true);
     player->appendToParent(root);
     player->setShapeFillColor(sf::Color::Green);
     player->setPosition(sf::Vector2f(0, 0));
-    player->setSize(200, 20);
+    player->setSize(20, 20);
 
 
     window.setActive();
@@ -63,13 +57,29 @@ Game::Game(std::string name, sf::Vector2f size) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                 window.close();
             }
+
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                sf::Vector2f pos = sf::Vector2f(sf::Mouse::getPosition(window).x,
+                                              sf::Mouse::getPosition(window).y);
+
+                // Dynamic Object
+                PhysicsObject* new_block = new PhysicsObject(true);
+                new_block->appendToParent(root);
+                new_block->setShapeFillColor(sf::Color::Blue);
+                new_block->setPosition(pos);
+                new_block->setSize(20, 20);
+
+                Node::printNodeTree(root);
+            }
         }
 
         window.clear();
-        
+
+        root->world.Step(max_framerate, 6, 2);
+
         root->Draw(&window);
 
-        //player->Update();
+        root->Update();
 
         window.display();
     }

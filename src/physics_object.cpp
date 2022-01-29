@@ -19,7 +19,7 @@ PhysicsObject::PhysicsObject(bool is_dynamic) : GameObject() {
     position = sf::Vector2f(0, 0);
     shape = sf::RectangleShape(size);
     dynamic = is_dynamic;
-    bodyDef.position.Set(-position.x / PHYS_SCALE, -position.y / PHYS_SCALE);
+    bodyDef.position.Set(-position.x / PHYS_SCALE, (-position.y + size.y) / PHYS_SCALE);
     physics_shape.SetAsBox(size.x / PHYS_SCALE, size.y / PHYS_SCALE);
 }
 
@@ -27,7 +27,7 @@ void PhysicsObject::Update() {
     if (physics_body) {
         b2Vec2 physics_position = physics_body->GetPosition();
         setPosition(physics_position.x * PHYS_SCALE, -physics_position.y * PHYS_SCALE);
-        std::cout << physics_position.y << std::endl;
+        //std::cout << physics_position.y << std::endl;
     } else {
         Scene* parent = (Scene*) getParent();
 
@@ -52,4 +52,19 @@ void PhysicsObject::Update() {
             std::cout << "[Error] Physics body does not have scene parent" << std::endl;
         }
     }
+}
+
+void PhysicsObject::setPosition(sf::Vector2f new_position) {
+    shape.setPosition(new_position);
+    position = new_position;
+    bodyDef.position.Set(-position.x / PHYS_SCALE, (-position.y + size.y) / PHYS_SCALE);
+    physics_shape.SetAsBox(size.x / PHYS_SCALE, size.y / PHYS_SCALE);
+}
+
+void PhysicsObject::setPosition(float x, float y) {
+    sf::Vector2f new_position = sf::Vector2f(x, y);
+    shape.setPosition(new_position);
+    position = new_position;
+    bodyDef.position.Set(-position.x / PHYS_SCALE, (-position.y + size.y) / PHYS_SCALE);
+    physics_shape.SetAsBox(size.x / PHYS_SCALE, size.y / PHYS_SCALE);
 }

@@ -23,3 +23,13 @@ void Scene::Draw(sf::RenderWindow *window) {
         }
     }
 }
+
+
+void Scene::Update() {
+    std::vector<Node*> children = getChildren();
+    if (children.size() > 0) {
+        for (int i = 0; i < getChildren().size(); i++) {
+            children[i]->Update();
+        }
+    }
+}

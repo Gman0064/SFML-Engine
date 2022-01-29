@@ -16,6 +16,7 @@ class Scene : public Node
     public:
         Scene();
         void Draw(sf::RenderWindow *window);
+        void Update();
         void PrintTree();
         b2Vec2 gravity;
         b2World world;

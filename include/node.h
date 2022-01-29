@@ -35,6 +35,8 @@ class Node
             parent->appendChild(this);
         };
 
+        virtual void Update();
+
         static void printNodeTree(Node* node, int level=0);
 };
 

@@ -25,8 +25,10 @@ class PhysicsObject : public GameObject
 
     public:
         PhysicsObject(bool is_dynamic);
-        void Update();
         void Instantiate();
+        void Update();
+        void setPosition(sf::Vector2f position);
+        void setPosition(float x, float y);
 };
 
 #endif
