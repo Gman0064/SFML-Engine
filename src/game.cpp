@@ -14,6 +14,7 @@
 #include "../include/scene.h"
 #include "../include/game_object.h"
 #include "../include/physics_object.h"
+#include "../include/tilemap.h"
 
 
 Game::Game(std::string name, sf::Vector2f size) {
@@ -25,20 +26,36 @@ Game::Game(std::string name, sf::Vector2f size) {
     Scene* root = new Scene();
 
 
-    // Platform Two
-    PhysicsObject* platform2 = new PhysicsObject(false);
-    platform2->appendToParent(root);
-    platform2->setShapeFillColor(sf::Color::Red);
-    platform2->setPosition(sf::Vector2f(0, 600));
-    platform2->setSize(800, 20);
+    // // Platform Two
+    // PhysicsObject* platform2 = new PhysicsObject(false);
+    // platform2->appendToParent(root);
+    // platform2->setShapeFillColor(sf::Color::Red);
+    // platform2->setPosition(sf::Vector2f(0, 600));
+    // platform2->setSize(800, 20);
 
-    // Dynamic Object
-    PhysicsObject* player = new PhysicsObject(true);
-    player->appendToParent(root);
-    player->setShapeFillColor(sf::Color::Green);
-    player->setPosition(sf::Vector2f(0, 0));
-    player->setSize(20, 20);
+    // // Dynamic Object
+    // PhysicsObject* player = new PhysicsObject(true);
+    // player->appendToParent(root);
+    // player->setShapeFillColor(sf::Color::Green);
+    // player->setPosition(sf::Vector2f(0, 0));
+    // player->setSize(20, 20);
 
+
+    const int level[] =
+    {
+        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
+        1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
+        0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
+        0, 1, 1, 0, 3, 3, 3, 0, 0, 0, 1, 1, 1, 2, 0, 0,
+        0, 0, 1, 0, 3, 0, 2, 2, 0, 0, 1, 1, 1, 1, 2, 0,
+        2, 0, 1, 0, 3, 0, 2, 2, 2, 0, 1, 1, 1, 1, 1, 1,
+        0, 0, 1, 0, 3, 2, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1,
+    };
+
+    TileMap* map = new TileMap("tileset.png");
+
+    //map->appendToParent(root);
 
     window.setActive();
 
@@ -63,13 +80,13 @@ Game::Game(std::string name, sf::Vector2f size) {
                                               sf::Mouse::getPosition(window).y);
 
                 // Dynamic Object
-                PhysicsObject* new_block = new PhysicsObject(true);
-                new_block->appendToParent(root);
-                new_block->setShapeFillColor(sf::Color::Blue);
-                new_block->setPosition(pos);
-                new_block->setSize(20, 20);
+                // PhysicsObject* new_block = new PhysicsObject(true);
+                // new_block->appendToParent(root);
+                // new_block->setShapeFillColor(sf::Color::Blue);
+                // new_block->setPosition(pos);
+                // new_block->setSize(20, 20);
 
-                Node::printNodeTree(root);
+                // Node::printNodeTree(root);
             }
         }
 
